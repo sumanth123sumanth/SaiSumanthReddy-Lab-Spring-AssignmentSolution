@@ -11,24 +11,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.greatlearning.student.studentmanagement.model.Role;
 import com.greatlearning.student.studentmanagement.model.User;
 
-
-
 public class MyUserDetails implements UserDetails {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	private User user;
-	
+
 	public MyUserDetails(User user) {
 		this.user = user;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<Role> roles = user.getRoles();
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		for(Role role : roles) {
+		for (Role role : roles) {
 			authorities.add(new SimpleGrantedAuthority(role.getName()));
 		}
 		return authorities;

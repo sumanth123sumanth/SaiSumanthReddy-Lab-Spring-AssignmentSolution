@@ -13,20 +13,18 @@ import org.springframework.stereotype.Service;
 
 import com.greatlearning.student.studentmanagement.model.Student;
 
-
-
 @Service
 public class StudentServiceImpl implements StudentService {
-	
+
 	SessionFactory sessionFactory;
 	Session session;
-	
+
 	@Autowired
 	public StudentServiceImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		try {
 			this.session = sessionFactory.getCurrentSession();
-		}catch(HibernateException he) {
+		} catch (HibernateException he) {
 			this.session = sessionFactory.openSession();
 		}
 	}
@@ -35,7 +33,7 @@ public class StudentServiceImpl implements StudentService {
 	@Transactional
 	public List<Student> getAllStudents() {
 		@SuppressWarnings("unchecked")
-		List<Student> list = (List<Student>)session.createQuery("from Student").list();
+		List<Student> list = (List<Student>) session.createQuery("from Student").list();
 		return list;
 	}
 
